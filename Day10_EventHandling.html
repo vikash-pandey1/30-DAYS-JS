@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        img {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="changeTxt">origin div for change</h1>
+    <button class="changeBtn">change Content</button>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.GPFEY6kfgxbsja6gmrW6rwHaE7%26pid%3DApi&f=1&ipt=c28d99e40cae8c9d774eeb5aaf6ce047d70d01f73c7a2d0f79f244c70197c08c&ipo=images" alt="img">
+
+    <div class="changeBck">Change background</div>
+
+    <input type="text" name="text" id="input">
+    <input type="text" name="" id="inputSecond">
+    <p id="para">current value: </p>
+
+    <form id="form">
+        <input type="text" name="" id="forminput" placeholder="write something" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <select id="mySelect">
+        <option value="" disabled selected>Select an option</option>
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+    </select>
+    <p id="displayParagraph">Selected value will appear here.</p>
+
+    <ul id="myList">
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+        <li>Item 4</li>
+    </ul>
+    <button id="addItemButton">Add Item</button>
+    <ul id="myListt">
+        <!-- Dynamically added items will appear here -->
+    </ul>
+    <script>
+        //1
+        let btn = document.querySelector('.changeBtn')
+        btn.addEventListener('click',()=>{
+            let txt = document.querySelector('.changeTxt')
+            txt.textContent="updated div"
+        })
+        let img = document.querySelector('img');
+        img.addEventListener('dblclick',()=>{
+            if(img.style.opacity==0){
+                img.style.opacity=1;
+            }else{
+                img.style.opacity=0;
+            }
+        })
+
+        //2
+        let changeBck = document.querySelector('.changeBck');
+        changeBck.addEventListener('mouseover',()=>{
+            changeBck.style.backgroundColor = 'blue'
+        })
+        changeBck.addEventListener('mouseout',()=>{
+            changeBck.style.backgroundColor = ''
+        })
+
+        //3
+        let input = document.querySelector('#input')
+        input.addEventListener('keydown',(event)=>{
+            console.log(`key press ${event.key}`)
+        })
+        let inputs = document.querySelector('#inputSecond')
+        let para = document.querySelector('#para')
+
+        inputs.addEventListener('keyup',()=>{
+            para.textContent = inputs.value
+        })
+
+        //4
+        let form = document.querySelector('#form')
+        form.addEventListener('submit',(event)=>{
+            event.preventDefault();
+            console.log('form submitted')
+        })
+        const selectElement = document.getElementById('mySelect');
+        const displayParagraph = document.getElementById('displayParagraph');
+
+        selectElement.addEventListener('change', () => {
+            displayParagraph.textContent = `Selected value: ${selectElement.value}`;
+        });
+
+        //5
+        const list = document.getElementById('myList');
+        list.addEventListener('click', (event) => {
+            // Check if the clicked element is an <li> element
+            if (event.target.tagName === 'LI') {
+                console.log(`Clicked item: ${event.target.textContent}`);
+            }
+        });
+        const listt = document.getElementById('myListt');
+        const addItemButton = document.getElementById('addItemButton');
+
+        // Event listener for clicks on list items (event delegation)
+        listt.addEventListener('click', (event) => {
+            if (event.target.tagName === 'LI') {
+                console.log(`Clicked item: ${event.target.textContent}`);
+            }
+        });
+
+        // Event listener for button to add new items
+        addItemButton.addEventListener('click', () => {
+            const newItem = document.createElement('li');
+            newItem.textContent = `Item ${listt.children.length + 1}`;
+            listt.appendChild(newItem);
+        })
+    </script>
+</body>
+</html>
