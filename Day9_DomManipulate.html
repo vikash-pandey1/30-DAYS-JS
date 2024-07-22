@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        h1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="textId" class="textClass">original text</h1>
+    <div class="nested">
+        <p>fist</p>
+        <p>second</p>
+        <p>third</p>
+    </div>
+    <ul>
+        <li>li</li>
+    </ul>
+
+    <div class="att">change att</div>
+    <button class="btn">Change content</button>
+    <script>
+        //access and modify existing div
+        document.querySelector("#textId").textContent="update by id"
+        let element= document.querySelector('.textClass');
+        element.style.backgroundColor = 'blue'
+
+        // create new element and add in body
+        let newElement = document.createElement('div');
+        newElement.textContent="element that added";
+        let body = document.querySelector('body');
+        body.appendChild(newElement)
+        let li = document.createElement('li');
+        li.textContent="second"
+        li.classList.add('second')
+        document.querySelector('ul').appendChild(li)
+
+        // access and delete div
+        document.querySelector('.second').remove()
+        let nest = document.querySelector('.nested');
+        nest.removeChild(nest.lastElementChild)
+
+
+        //modifying attributes
+        let att = document.querySelector('.att')
+        att.className = 'attt'
+        att.classList.add('ram')
+        att.classList.remove('ram')
+
+
+        // eventListener
+        let btn = document.querySelector('.btn');
+        btn.addEventListener('click',()=>[
+            att.textContent="updated paragraph"
+        ])
+        att.addEventListener('mouseover',()=>{
+            att.style.color = 'red'
+        })
+    </script>
+</body>
+</html>
