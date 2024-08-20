@@ -1,23 +1,55 @@
-function rotateArray(arr, k) {
-    const n = arr.length;
-    k = k % n; // Handle cases where k is larger than the array length
-    reverse(arr, 0, n - 1);       // Reverse the entire array
-    reverse(arr, 0, k - 1);       // Reverse the first k elements
-    reverse(arr, k, n - 1);       // Reverse the remaining elements
-}
-
-function reverse(arr, start, end) {
-    while (start < end) {
-        let temp = arr[start];
-        arr[start] = arr[end];
-        arr[end] = temp;
-        start++;
-        end--;
+function bubbleSort(arr){
+    for(let i=0;i<arr.length;i++){
+        for(let j=i+1;j<arr.length;j++){
+            if(arr[i]>arr[j]){
+                let temp = arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+            }
+        }
     }
 }
+function selection(arr){
+    for(let i=0;i<arr.length;i++){
+        let min = i;
+        for(let j=i+1;j<arr.length;j++){
+            if(arr[j]<arr[min]){
+                min = j;
+            }
+        }
+        let temp = arr[i];
+        arr[i]=arr[min];
+        arr[min]=temp;
+    }
+}
+function insertion(arr){
 
-// Example usage
-let arr = [1, 2, 3, 4, 5, 6, 7];
-let k = 7;
-rotateArray(arr, k);
-console.log("Rotated array:", arr);
+}
+function partition(arr,low,high){
+    let pivot = arr[high];
+    let i=low-1;
+    for(let j=low;j<arr.length;j++){
+        if(arr[j]<pivot){
+            i++;
+            let temp = arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+    let temp = arr[i+1];
+    arr[i+1]=arr[high];
+    arr[high]=temp;
+    return i+1;
+}
+function quickSort(arr,low,high){
+    if(low<high){
+        let pi = partition(arr,low,high);
+    quickSort(arr,low,pi-1);
+    quickSort(arr,pi+1,high);
+    }
+}
+let arr = [13,5,3,63,6];
+// bubbleSort(arr);
+// selection(arr);
+quickSort(arr,0,4);
+console.log(arr);
